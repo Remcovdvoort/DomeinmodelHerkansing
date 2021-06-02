@@ -1,31 +1,27 @@
 import java.util.ArrayList;
 
 public abstract class Gebruiker {
-    private ArrayList<Double> wiskundeCijfers;
-    private ArrayList<Double> natuurkundeCijfers;
-    private ArrayList<Double> OPTCijfers;
+
 
     private String naam;
     private String gebruikersnaam;
     private String wachtwoord;
 
-    public Gebruiker(String naam, String gebruikersnaam, String wachtwoord, ArrayList<Double> wiskundeCijfers, ArrayList<Double> OPTCijfers, ArrayList<Double> natuurkundeCijfers) {
-        this.natuurkundeCijfers = natuurkundeCijfers;
-        this.wiskundeCijfers = wiskundeCijfers;
-        this.OPTCijfers = OPTCijfers;
+
+    public Gebruiker(String naam, String gebruikersnaam, String wachtwoord) {
         this.naam = naam;
         this.gebruikersnaam= gebruikersnaam;
         this.wachtwoord = wachtwoord;
     }
-    public String vakLijst(String naam, ArrayList<Double> wiskunde, ArrayList<Double> OPTCijfers, ArrayList<Double> natuurkundeCijfers) {
-        for(naam : Docent.docentNamen) {
-            if(naam== "Karel"){
-                System.out.println(wiskunde);
+    public String vakLijst(ArrayList<Double> wiskundeCijfers, ArrayList<Double> OPTCijfers, ArrayList<Double> natuurkundeCijfers) {
+        for(String naam:Docent.docentNamen) {
+            if(naam.equals("Karel")){
+                System.out.println(wiskundeCijfers);
             }
-            if(naam=="Steven"){
+            if(naam.equals("Steven")){
                 System.out.println(OPTCijfers);
             }
-            if(naam=="Jan"){
+            if(naam.equals("Jan")){
                 System.out.println(natuurkundeCijfers);
             }
         }
