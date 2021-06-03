@@ -1,77 +1,67 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Login {
+public class LogIn {
 
-    private static Login singleton;
+    private static LogIn singleton;
     private ArrayList<Gebruiker> gebruikers;
     private Gebruiker ge;
 
-    private Login () {
+    private LogIn() {
         gebruikers = new ArrayList<> ();
-        gebruikers.add(new Gebruiker("x", "y") {
-        });
-        gebruikers.add(new Gebruiker("a", "b") {
-        });
-        gebruikers.add(new Gebruiker("k", "l") {
-        });
+        gebruikers.addAll(Student.students) ;
+        gebruikers.addAll(Docent.docenten);
+        gebruikers.add(new Student("Remco", "remco", "domeinmodel"));
+        gebruikers.add(new WiskundeDocent("Karel", "karel", "Wiskunde"));
+        gebruikers.add(new OPTDocent("Steven", "steven", "OPT"));
+        gebruikers.add(new NatuurkundeDocent("Job", "job", "Natuurkunde"));
         ge = null;
     }
 
-    public static Login getInstance () {
+    public Gebruiker getLoggedIn(){
+        return ge;
+    }
 
+    public static LogIn getInstance () {
         if (singleton == null) {
-            singleton = new Login ();
+            singleton = new LogIn();
         }
-
         return singleton;
     }
 
-    private boolean userExists (String name) {
+    private boolean userExists (String naam) {
 
         for (Gebruiker ge : gebruikers) {
-            if (ge.getName ().equals (name)) {
+            if (ge.getGebruikersnaam ().equals (naam)) {
                 this.ge = ge;
                 return true;
             }
         }
-
         return false;
     }
 
-    public boolean userIsAuthenticated () {
-        return ge != null;
-    }
-
     public boolean isAuthenticated () {
-
-        if (userIsAuthenticated ()) {
+        if (ge != null) {
             return true;
         }
         else {
-
             Scanner scanner = new Scanner(System.in);
-
-            for (int i = 0; i < 3; i++) {
-
-                System.out.println ("=================");
-                System.out.print("Met welke gebruikersnaam wilt u inloggen? ");
-                String userName = scanner.nextLine();
-                System.out.print ("Graag het bijbehorende password: ");
-                String password = scanner.nextLine();
-                System.out.println ("=================");
-
-                if (userExists (userName) && ge.passwordIsCorrect(password)) {
+            for (int i = 0; i < 5; i++) {
+                System.out.print("Geef uw gebruikersnaam: ");
+                String gebruikersnaam = scanner.nextLine();
+                System.out.print ("Geef uw wachtwoord: ");
+                String wachtwoord = scanner.nextLine();
+                if (userExists (gebruikersnaam) && wachtwoord.equals(ge.getWachtwoord())) {
                     System.out.println ();
                     return true;
                 }
-
-                System.out.println ("De combinatie van gebruikersnaam en password is niet OK.");
+                System.out.println ("De combinatie van je gebruikersnaam en wachtwoord kloppen niet.");
             }
-
-            System.out.println ("=================");
-            System.out.println ();
             return false;
         }
+    }
+
+    public void logUit() {
+        ge=null;
     }
 }

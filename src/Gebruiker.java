@@ -13,17 +13,14 @@ public abstract class Gebruiker {
         this.gebruikersnaam= gebruikersnaam;
         this.wachtwoord = wachtwoord;
     }
-    public String vakLijst(ArrayList<Double> wiskundeCijfers, ArrayList<Double> OPTCijfers, ArrayList<Double> natuurkundeCijfers) {
-        for(String naam:Docent.docentNamen) {
-            if(naam.equals("Karel")){
-                System.out.println(wiskundeCijfers);
-            }
-            if(naam.equals("Steven")){
-                System.out.println(OPTCijfers);
-            }
-            if(naam.equals("Jan")){
-                System.out.println(natuurkundeCijfers);
-            }
-        }
+
+    public abstract void printMenu();
+
+    public String getGebruikersnaam() {
+        return gebruikersnaam;
+    }
+
+    public String getWachtwoord(){
+        return wachtwoord;
     }
 }

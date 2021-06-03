@@ -1,14 +1,58 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public abstract class Docent extends Gebruiker {
 
-    public static ArrayList<String> docentNamen = new ArrayList<>();
+    public static ArrayList<Docent> docenten = new ArrayList<>();
 
     public Docent(String naam, String gebruikersnaam, String wachtwoord) {
         super(naam, gebruikersnaam, wachtwoord);
 
     }
+
+    public void printMenu(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Menu");
+        System.out.println("1) Cijfers bekijken");
+        System.out.println("2) Cijfers invoeren");
+        System.out.println("3) Log uit");
+        int keuze = sc.nextInt();
+        switch (keuze) {
+            case 1:
+                try{
+                    cijferBekijken();
+                }catch(InputMismatchException i){
+                    System.out.println("Foute invoer");
+                    cijferBekijken();
+                }
+                break;
+            case 2:
+                try{
+                    cijferToevoegen();
+                }catch(InputMismatchException i){
+                    System.out.println("Foute invoer");
+                    cijferToevoegen();
+                }
+                break;
+            case 3: LogIn.getInstance().logUit();
+        }
+    }
+
+    public void cijferBekijken(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Geef je studentennummer op:");
+        int studentennummer = sc.nextInt();
+        for (Student student : Student.students) {
+            if(student.getStudentNummer()==studentennummer){
+                printCijfers(student);
+            }
+        }
+    }
+
+    protected abstract void printCijfers(Student student);
+
 
     public void cijferToevoegen(){
         Scanner sc = new Scanner(System.in);
@@ -20,6 +64,7 @@ public abstract class Docent extends Gebruiker {
         }
 
         System.out.println("Voer het cijfer in:");
+        sc.useLocale(Locale.US);
         double cijfer = sc.nextDouble();
         System.out.println("Voer het aantal dagen te laat in:");
         Integer dagenTelaat = sc.nextInt();
