@@ -6,15 +6,16 @@ public class OPTDocent extends Docent{
 
     @Override
     protected void printCijfers(Student student) {
-        System.out.println("Cijfers:");
-        for (Double optCijfer : student.getOPTCijfers()) {
+        System.out.println("Cijfers van OPT van studentnummer: " + student.getStudentNummer());
+        for (Double optCijfer : student.getCijferLijst().getOPTCijfers()) {
             System.out.println(optCijfer);
         }
+        System.out.println();
     }
 
     @Override
     protected void cijferOpslaan(Student st, double cijfer) {
-        st.getOPTCijfers().add(cijfer);
+        st.getCijferLijst().getOPTCijfers().add(cijfer);
         System.out.println("Cijfer is opgeslagen in OPT cijfers.");
     }
 }

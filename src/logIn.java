@@ -12,6 +12,7 @@ public class LogIn {
         gebruikers.addAll(Student.students) ;
         gebruikers.addAll(Docent.docenten);
         gebruikers.add(new Student("Remco", "remco", "domeinmodel"));
+        gebruikers.add(new Student("Dylan", "dylan", "DJ"));
         gebruikers.add(new WiskundeDocent("Karel", "karel", "Wiskunde"));
         gebruikers.add(new OPTDocent("Steven", "steven", "OPT"));
         gebruikers.add(new NatuurkundeDocent("Job", "job", "Natuurkunde"));

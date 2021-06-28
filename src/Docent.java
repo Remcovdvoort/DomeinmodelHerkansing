@@ -17,7 +17,8 @@ public abstract class Docent extends Gebruiker {
         System.out.println("Menu");
         System.out.println("1) Cijfers bekijken");
         System.out.println("2) Cijfers invoeren");
-        System.out.println("3) Log uit");
+        System.out.println("3) Toekenningspunten bekijken");
+        System.out.println("4) Log uit");
         int keuze = sc.nextInt();
         switch (keuze) {
             case 1:
@@ -36,8 +37,20 @@ public abstract class Docent extends Gebruiker {
                     cijferToevoegen();
                 }
                 break;
-            case 3: LogIn.getInstance().logUit();
+            case 3: bekijkRequirements();
+                break;
+            case 4: LogIn.getInstance().logUit();
         }
+    }
+
+    public void bekijkRequirements(){
+        System.out.println("De toekenningspunten van een cijfer zijn als volgt:");
+        System.out.println(" - Als de dagen te laat meer dan 2 dagen is, dan wordt het cijfer automatisch een 1.0");
+        System.out.println(" - Als de dagen te laat meer dan 0 dagen en minder dan 2 of gelijk aan 2 dagen, dan word er automatisch 2 punten van het cijfer afgetrokken");
+        System.out.println(" - Als de student plagiaat heeft gepleegd, dan word het cijfer automatisch een 1.0");
+        System.out.println(" - Als de student de bonus opdracht correct heeft gemaakt, dan worden er 2 punten bij het cijfer opgeteld");
+        System.out.println(" - Als de student een github invite heeft gestuurd naar de docent, dan word er 1 punt opgeteld bij het cijfer");
+        System.out.println(" - Als de student geen github invite heeft gestuurd, dan word er 0.5 afgetrokken van het cijfer");
     }
 
     public void cijferBekijken(){

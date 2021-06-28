@@ -23,4 +23,9 @@ public abstract class Gebruiker {
     public String getWachtwoord(){
         return wachtwoord;
     }
+
+    public String getNaam() {
+        return naam;
+    }
 }
+

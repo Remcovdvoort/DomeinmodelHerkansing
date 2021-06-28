@@ -6,7 +6,5 @@ public class Main {
         while(LogIn.getInstance().isAuthenticated()){
             LogIn.getInstance().getLoggedIn().printMenu();
         }
-
     }
-
 }
