@@ -5,7 +5,7 @@ public class Student extends Gebruiker {
     private Integer studentNummer;
     private static Integer vorigStudentNummer = 0;
     public static ArrayList<Student> students = new ArrayList<>();
-    private CijferLijst cijferLijst;
+    private ArrayList <CijferLijst> cijferlijsten = new ArrayList<>();
 
 
     public Student(String naam, String gebruikersnaam, String wachtwoord) {
@@ -14,8 +14,19 @@ public class Student extends Gebruiker {
         students.add(this);
     }
 
-    public CijferLijst getCijferLijst() {
-        return cijferLijst;
+    public void voegVakToe(String vak){
+        cijferlijsten.add(new CijferLijst(vak));
+    }
+
+
+
+    public ArrayList<Double> getCijfersByVak(String vak) {
+        for(CijferLijst cij: cijferlijsten){
+            if(vak.equals(cij.getVak())){
+                return cij.getCijfers();
+            }
+        }
+        return null;
     }
 
     public Integer getStudentNummer() {
@@ -32,13 +43,6 @@ public class Student extends Gebruiker {
         return null;
     }
 
-    public void printCijfers(ArrayList<Double> cijfers) {
-        for (Double c : cijfers) {
-            System.out.println(c);
-        }
-    }
-
-
 
     public void printMenu() {
         Scanner sc = new Scanner(System.in);
@@ -54,23 +58,12 @@ public class Student extends Gebruiker {
                 cijfersBekijken();
                 break;
             case 2:
-                if(cijferLijst.cijferCheck(cijferLijst.getWiskundeCijfers())){
-                    System.out.println("Voor het vak wiskunde heb je het gemiddelde, alles boven de 4.5 en het aantaltoetsen behaald");
-                }
-                else {
-                    System.out.println("Voor het vak wiskunde is een of meer van de requirements niet behaald");
-                }
-                if(cijferLijst.cijferCheck(cijferLijst.getOPTCijfers())){
-                    System.out.println("voor het vak OPT heb je het gemiddelde, alles boven de 4.5 en het aantaltoetsen behaald");
-                }
-                else {
-                    System.out.println("Voor het vak OPT is een of meer van de requirements niet behaald");
-                }
-                if(cijferLijst.cijferCheck(cijferLijst.getNatuurkundeCijfers())){
-                    System.out.println("voor het vak natuurkunde heb je het gemiddelde, alles boven de 4.5 en het aantaltoetsen behaald");
-                }
-                else {
-                    System.out.println("voor het vak natuurkunde is een of meer van de requirements niet behaald");
+                for(CijferLijst cij: cijferlijsten) {
+                    if (cij.cijferCheck()) {
+                        System.out.println("Voor het vak "+ cij.getVak()+ " heb je het gemiddelde, alles boven de 4.5 en het aantaltoetsen behaald");
+                    } else {
+                        System.out.println("Voor het vak "+ cij.getVak()+ " is een of meer van de requirements niet behaald");
+                    }
                 }
                 break;
             case 3:
@@ -83,30 +76,13 @@ public class Student extends Gebruiker {
     public void cijfersBekijken() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Kies je vak:");
-        System.out.println("1) Wiskunde cijfers");
-        System.out.println("2) OPT cijfers");
-        System.out.println("3) Natuurkunde Cijfers");
-        int keuze = sc.nextInt();
-        switch (keuze) {
-            case 1: {
-                System.out.println("Uw cijfers voor wiskunde:");
-                printCijfers(cijferLijst.getWiskundeCijfers());
-                System.out.println();
-                break;
-            }
-            case 2: {
-                System.out.println("Uw cijfers voor OPT:");
-                printCijfers(cijferLijst.getOPTCijfers());
-                System.out.println();
-                break;
-            }
-            case 3: {
-                System.out.println("Uw cijfers voor natuurkunde:");
-                printCijfers(cijferLijst.getNatuurkundeCijfers());
-                System.out.println();
-                break;
-            }
+        for(int i =0; i<cijferlijsten.size();i++) {
+            System.out.println(i + ") " + cijferlijsten.get(i).getVak() + " cijfers");
         }
+        int keuze = sc.nextInt();
+        System.out.println("Uw cijfers voor " + cijferlijsten.get(keuze).getVak());
+        cijferlijsten.get(keuze).printCijfers();
+        System.out.println();
     }
 
     public void viewStudentNummer(){

@@ -5,21 +5,21 @@ public class WiskundeDocent extends Docent {
 
     @Override
     protected void printCijfers(Student student) {
-        System.out.println("Cijfers van wiskunde van studentnummer: " + student.getStudentNummer());
-        for (Double wiskunde : student.getCijferLijst().getWiskundeCijfers()) {
-            if(student.getCijferLijst().getWiskundeCijfers().contains(null)){
-                System.out.println("Er zijn geen cijfers gevonden");
+        System.out.println("Cijfers van Wiskunde van studentnummer: " + student.getStudentNummer());
+        try{
+            for (Double wiskundeCijfer : student.getCijfersByVak("Wiskunde")) {
+                System.out.println(wiskundeCijfer);
             }
-            else {
-                System.out.println(wiskunde);
-            }
+            System.out.println();
+        }catch(NullPointerException n){
+            System.out.println("Student volgt het vak niet");
         }
-        System.out.println();
     }
+
 
     @Override
     protected void cijferOpslaan(Student st, double cijfer) {
-        st.getCijferLijst().getWiskundeCijfers().add(cijfer);
+        st.getCijfersByVak("Wiskunde").add(cijfer);
         System.out.println("Cijfer is opgeslagen in wiskunde cijfers.");
     }
 }

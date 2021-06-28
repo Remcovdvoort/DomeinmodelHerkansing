@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class LogIn {
@@ -9,13 +10,11 @@ public class LogIn {
 
     private LogIn() {
         gebruikers = new ArrayList<> ();
-        gebruikers.addAll(Student.students) ;
-        gebruikers.addAll(Docent.docenten);
-        gebruikers.add(new Student("Remco", "remco", "domeinmodel"));
-        gebruikers.add(new Student("Dylan", "dylan", "DJ"));
-        gebruikers.add(new WiskundeDocent("Karel", "karel", "Wiskunde"));
-        gebruikers.add(new OPTDocent("Steven", "steven", "OPT"));
-        gebruikers.add(new NatuurkundeDocent("Job", "job", "Natuurkunde"));
+        Collections.addAll(gebruikers, new Student("Remco", "remco", "domeinmodel"), new Student("Dylan", "dylan", "DJ")) ;
+        Collections.addAll(gebruikers, new WiskundeDocent("Karel", "karel", "Wiskunde"), new OPTDocent("Steven", "steven", "OPT"), new NatuurkundeDocent("Job", "job", "Natuurkunde"));
+        Student.students.get(0).voegVakToe("OPT");
+        Student.students.get(0).voegVakToe("Wiskunde");
+        Student.students.get(0).voegVakToe("Natuurkunde");
         ge = null;
     }
 

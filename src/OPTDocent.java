@@ -7,15 +7,19 @@ public class OPTDocent extends Docent{
     @Override
     protected void printCijfers(Student student) {
         System.out.println("Cijfers van OPT van studentnummer: " + student.getStudentNummer());
-        for (Double optCijfer : student.getCijferLijst().getOPTCijfers()) {
-            System.out.println(optCijfer);
+        try {
+            for (Double optCijfer : student.getCijfersByVak("OPT")) {
+                System.out.println(optCijfer);
+            }
+            System.out.println();
+        }catch(NullPointerException n){
+            System.out.println("Student volgt het vak niet");
         }
-        System.out.println();
     }
 
     @Override
     protected void cijferOpslaan(Student st, double cijfer) {
-        st.getCijferLijst().getOPTCijfers().add(cijfer);
+        st.getCijfersByVak("OPT").add(cijfer);
         System.out.println("Cijfer is opgeslagen in OPT cijfers.");
     }
 }

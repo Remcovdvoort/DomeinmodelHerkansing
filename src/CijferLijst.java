@@ -1,23 +1,24 @@
 import java.util.ArrayList;
 
 public class CijferLijst {
-    private ArrayList<Double> wiskundeCijfers = new ArrayList<>();
-    private ArrayList<Double> natuurkundeCijfers = new ArrayList<>();
-    private ArrayList<Double> OPTCijfers = new ArrayList<>();
+    private ArrayList<Double> cijfers = new ArrayList<>();
+    private String vak;
 
-    public ArrayList<Double> getWiskundeCijfers() {
-        return wiskundeCijfers;
+    public ArrayList<Double> getCijfers() {
+        return cijfers;
     }
 
-    public ArrayList<Double> getNatuurkundeCijfers() {
-        return natuurkundeCijfers;
+    public CijferLijst(String vak) {
+        this.vak = vak;
     }
 
-    public ArrayList<Double> getOPTCijfers() {
-        return OPTCijfers;
+    public void printCijfers() {
+        for (Double c : cijfers) {
+            System.out.println(c);
+        }
     }
 
-    public boolean cijferCheck(ArrayList<Double> cijfers) {
+    public boolean cijferCheck() {
         double gemiddelde = 0.0;
         for (Double c : cijfers) {
             gemiddelde += c;
@@ -33,5 +34,9 @@ public class CijferLijst {
             return false;
         }
         return true;
+    }
+
+    public String getVak() {
+        return vak;
     }
 }

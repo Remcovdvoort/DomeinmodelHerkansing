@@ -75,7 +75,6 @@ public abstract class Docent extends Gebruiker {
             Integer studentNummer = sc.nextInt();
             st = Student.getStudent(studentNummer);
         }
-
         System.out.println("Voer het cijfer in:");
         sc.useLocale(Locale.US);
         double cijfer = sc.nextDouble();
@@ -88,7 +87,11 @@ public abstract class Docent extends Gebruiker {
         System.out.println("Geef aan of de student een Github invite heeft gestuurd naar de docent ('true'/'false'):");
         boolean githubInvite = sc.nextBoolean();
         cijfer = bepaalCijfer(cijfer, dagenTelaat, plagiaat, bonusOpdracht, githubInvite );
-        cijferOpslaan(st, cijfer);
+        try{
+            cijferOpslaan(st, cijfer);
+        }catch(NullPointerException n){
+            System.out.println("Student volgt het vak niet");
+        }
     }
 
     protected abstract void cijferOpslaan(Student st, double cijfer);

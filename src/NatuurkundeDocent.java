@@ -5,16 +5,19 @@ public class NatuurkundeDocent extends Docent{
 
     @Override
     protected void printCijfers(Student student) {
-        System.out.println("Cijfers van natuurkunde van studentnummer: " + student.getStudentNummer());
-        for (Double natuurkunde : student.getCijferLijst().getNatuurkundeCijfers()) {
-            System.out.println(natuurkunde);
+        System.out.println("Cijfers van Natuurkunde van studentnummer: " + student.getStudentNummer());
+        try{
+            for (Double natuurkundeCijfer : student.getCijfersByVak("Natuurkunde")) {
+                System.out.println(natuurkundeCijfer);
+            }
+            System.out.println();
+        }catch(NullPointerException n){
+            System.out.println("Student volgt het vak niet");
         }
-        System.out.println();
     }
-
     @Override
     protected void cijferOpslaan(Student st, double cijfer) {
-        st.getCijferLijst().getNatuurkundeCijfers().add(cijfer);
+        st.getCijfersByVak("Natuurkunde").add(cijfer);
         System.out.println("Cijfer is opgeslagen in natuurkunde cijfers.");
     }
 }
